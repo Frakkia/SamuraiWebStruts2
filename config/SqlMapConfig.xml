@@ -1,0 +1,34 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+
+   <typeAliases>
+      <typeAlias alias = "Torneo" type = "it.consorzioformaweb.model.dto.Torneo"/>
+      <typeAlias alias = "Squadra" type = "it.consorzioformaweb.model.dto.Squadra"/>
+      <typeAlias alias = "Societa" type = "it.consorzioformaweb.model.dto.Societa"/>
+      <typeAlias alias = "Atleta" type = "it.consorzioformaweb.model.dto.Atleta"/>
+   </typeAliases>
+		
+   <environments default = "developement">
+      <environment id = "developement">
+         <transactionManager type = "JDBC"/>  
+			
+            <dataSource type = "POOLED">
+               <property name = "driver" value = "com.mysql.jdbc.Driver"/>
+               <property name = "url" value = "jdbc:mysql://localhost:3306/db_torneo"/>
+               <property name = "username" value = "root"/>
+               <property name = "password" value = ""/>
+            </dataSource>        
+				
+      </environment>
+   </environments>
+	
+   <mappers>
+      <mapper resource = "sqlMappings/Torneo.xml"/>
+      <mapper resource = "sqlMappings/Squadra.xml"/>
+      <mapper resource = "sqlMappings/Societa.xml"/>
+      <mapper resource = "sqlMappings/Atleta.xml"/>
+   </mappers>
+   
+</configuration>

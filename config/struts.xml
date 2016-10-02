@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+ "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+ "http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.custom.i18n.resources" value="ApplicationResources" />
+	<package name="default" namespace="/" extends="struts-default">
+		<action name="login" class="it.consorzioformaweb.action.LoginAction"> <!-- appartiene al package di default -->
+			<result name="success">Welcome.jsp</result>
+			<result name="error">Login.jsp</result>
+		</action>
+		
+		<action name="utenteAction" class="it.consorzioformaweb.action.UtenteAction">
+			<result name="success">utenteList.jsp</result>
+			<result name="input">utenteForm.jsp</result>
+		</action>
+		
+	</package>
+	
+	<package name="societa" namespace="/societa" extends="struts-default">
+		<action name="societaSearchAction" class="it.consorzioformaweb.action.SocietaAction" method="search">
+			<result name="success">societaList.jsp</result>
+		</action>
+		
+		
+		<action name="societaCreateAction" class="it.consorzioformaweb.action.SocietaAction" method="create">
+			<result name="success" type="redirectAction">
+				<param name="actionName">societaSearchAction</param>
+				<param name="namespace">/societa</param>
+			</result>
+			<result name="input">societaForm.jsp</result>
+		</action>
+		
+		<action name="societaReadAction" class="it.consorzioformaweb.action.SocietaAction" method="read">
+			<result name="success">societaForm.jsp</result>
+		</action>
+		
+		<action name="societaUpdateAction" class="it.consorzioformaweb.action.SocietaAction" method="update">
+			<result name="success" type="redirectAction">
+				<param name="actionName">societaSearchAction</param>
+				<param name="namespace">/societa</param>
+			</result>
+			<result name="input">societaForm.jsp</result>
+		</action>
+		
+		<action name="societaDeleteAction" class="it.consorzioformaweb.action.SocietaAction" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="actionName">societaSearchAction</param>
+				<param name="namespace">/societa</param>
+			</result>
+		</action>
+	
+	</package> 
+	
+	<package name="squadra" namespace="/squadra" extends="struts-default">
+		<action name="squadraSearchAction" class="it.consorzioformaweb.action.SquadraAction" method="search">
+			<result name="success">squadraList.jsp</result>
+		</action>
+		
+		
+		<action name="squadraCreateAction" class="it.consorzioformaweb.action.SquadraAction" method="create">
+			<result name="success" type="redirectAction">
+				<param name="actionName">squadraSearchAction</param>
+				<param name="namespace">/squadra</param>
+			</result>
+			<result name="input">squadraForm.jsp</result>
+		</action>
+		
+		<action name="squadraReadAction" class="it.consorzioformaweb.action.SquadraAction" method="read">
+			<result name="success">squadraForm.jsp</result>
+		</action>
+		
+		<action name="squadraUpdateAction" class="it.consorzioformaweb.action.SquadraAction" method="update">
+			<result name="success" type="redirectAction">
+				<param name="actionName">squadraSearchAction</param>
+				<param name="namespace">/squadra</param>
+			</result>
+			<result name="input">squadraForm.jsp</result>
+		</action>
+		
+		<action name="squadraDeleteAction" class="it.consorzioformaweb.action.SquadraAction" method="delete">
+			<result name="success" type="redirectAction">
+				<param name="actionName">squadraSearchAction</param>
+				<param name="namespace">/squadra</param>
+			</result>
+		</action>
+	
+	</package> 
+	
+	<package name="torneo" namespace="/torneo" extends="struts-default">
+	
+		<action name="torneoSearchAction" class="it.consorzioformaweb.action.TorneoAction" method="search">
+			<result name="success">torneoList.jsp</result>
+		</action>
+		
+		<action name="torneoCreateAction" class="it.consorzioformaweb.action.TorneoAction" method="create">
+			<result name="success" type="redirectAction">
+				<param name="actionName">torneoSearchAction</param>
+				<param name="namespace">/torneo</param>
+			</result>
+			<result name="input">torneoForm.jsp</result>
+		</action>
+		
+		<action name="torneoReadAction" class="it.consorzioformaweb.action.TorneoAction" method="read">
+			<result name="success">torneoForm.jsp</result>
+		</action>
+		
+		<action name="torneoUpdateAction" class="it.consorzioformaweb.action.TorneoAction" method="update">
+			<result name="success" type="redirectAction">
+				<param name="actionName">torneoSearchAction</param>
+				<param name="namespace">/torneo</param>
+			</result>
+			<result name="input">torneoForm.jsp</result>
+		</action>
+		
+		<action name="torneoDeleteAction" class="it.consorzioformaweb.action.TorneoAction" method="delete">
+			<result name="success" type="redirect">torneoSearchAction</result>
+		</action>
+	</package>
+	
+ 	<!-- xm diviso in più parti
+	<include file="manning/chapterTwo/chapterTwo.xml"/> -->
+</struts> 

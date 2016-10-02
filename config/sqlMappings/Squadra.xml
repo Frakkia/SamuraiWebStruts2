@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SquadraMapping">
+
+	<insert id="insert" parameterType="Squadra">
+		INSERT INTO T_SQUADRA(NOME,ID_TORNEO)
+		VALUES(#{nome},#{torneo.id});
+		<selectKey keyProperty = "id" resultType = "int" order = "AFTER">
+			SELECT LAST_INSERT_ID() as ID      
+		</selectKey>
+	</insert>
+
+	<update id="update" parameterType="Squadra">
+		UPDATE T_SQUADRA SET NOME = #{nome},
+		ID_TORNEO = #{torneo.id} WHERE ID = #{id};
+	</update>
+
+	<delete id="delete" parameterType="Squadra">
+		DELETE FROM T_SQUADRA WHERE ID = #{id};
+	</delete>
+
+	<select id="getAll" resultMap="result">
+		SELECT ID,NOME,ID_TORNEO
+		FROM T_SQUADRA 
+	</select>
+
+	<select id="getById" parameterType="int" resultMap="result">
+		SELECT ID,NOME,ID_TORNEO
+		FROM T_SQUADRA
+		WHERE ID = #{id};
+	</select>
+
+	<select id="getByTorneo" parameterType="int" resultMap="result">
+		SELECT ID,NOME,ID_TORNEO
+		FROM T_SQUADRA
+		WHERE ID_TORNEO = #{id};
+	</select>
+	
+	<resultMap id="result" type="Squadra">
+		<id property="id" column="ID"/>
+		<result property="nome" column="NOME" />
+		<association property="torneo" column="ID_TORNEO" select="TorneoMapping.getById"/>
+	</resultMap>
+	
+</mapper>
