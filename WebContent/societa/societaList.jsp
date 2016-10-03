@@ -8,7 +8,10 @@
 <title>Elenco Squadre</title>
 </head>
 <body>
-
+<s:form action="societaSearchAction">
+		<s:select list="map" key="package.scegli.squadra" name="id_squadra" headerKey="-1" headerValue="%{getText('societa.squadra.tutti')}"></s:select>
+	<s:submit key="package.invia"/>
+	</s:form>
 <table border="1">
 	<thead>
 		<tr><th>id</th><th>nome</th><th>Squadra</th><th>Modifica</th><th>Elimina</th></tr>
@@ -18,10 +21,7 @@
 		<td><a href="societaReadAction.action?id=${item.id}"><img src="../img/modifica.png" width="20px"/></a></td>
 		<td><a href="societaDeleteAction.action?id=${item.id}"><img src="../img/elimina.png" width="20px"/></a></td></tr>
 	</s:iterator>
-	<s:form action="societaSearchAction">
-		<s:select list="map" key="package.scegli.squadra" name="id_squadra" headerKey="-1" headerValue="%{getText('societa.squadra.tutti')}"></s:select>
-	<s:submit label="Filtra"/>
-	</s:form>
+	
 </table>
 </body>
 </html>

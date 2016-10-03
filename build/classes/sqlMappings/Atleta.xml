@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="AtletaMapping">
+
+	<insert id="insertPersona" parameterType="Atleta">
+		INSERT INTO T_PERSONA(NOME,COGNOME,DATA_NASCITA,SESSO,COMUNE_NASCITA,INDIRIZZO_RESIDENZA,TEL,MAIL,CF)
+		VALUES(#{nome},#{cognome},#{dataNascita},#{sesso},#{comuneNascita},#{indirizzoResidenza},#{telefono},#{mail},#{codiceFiscale})
+		<selectKey keyProperty = "id" resultType = "int" order = "AFTER">
+			SELECT LAST_INSERT_ID() as ID      
+		</selectKey>
+	</insert>
+
+	<insert id="insertAtleta" parameterType="Atleta">
+		INSERT INTO T_ATLETA(ID_PERSONA,ID_SOCIETA,ANNO_ISCRIZIONE)
+		VALUES(#{id},#{societa.id},#{annoIscrizione})
+		<selectKey keyProperty = "idAtleta" resultType = "int" order = "AFTER">
+			SELECT LAST_INSERT_ID() as ID      
+		</selectKey>
+	</insert>
+	
+	<update id="updatePersona" parameterType="Atleta">
+		UPDATE T_PERSONA SET NOME = #{nome}, COGNOME = #{cognome}, DATA_NASCITA = #{dataNascita},
+		SESSO = #{sesso}, COMUNE_NASCITA = #{comuneNascita}, INDIRIZZO_RESIDENZA = #{indirizzoResidenza}, TEL = #{telefono}, MAIL = #{mail}, CF = #{codiceFiscale}
+		WHERE ID = #{id};
+	</update>
+
+	<update id="updateAtleta" parameterType="Atleta">
+		UPDATE T_ATLETA SET ID_PERSONA = #{id}, ID_Societa = #{societa.id}, ANNO_ISCRIZIONE = #{annoIscrizione}
+		WHERE ID = #{idAtleta};
+	</update>
+	
+	<delete id="deletePersona" parameterType="Atleta">
+		DELETE FROM T_PERSONA WHERE ID = #{id};
+	</delete>
+
+	<delete id="deleteAtleta" parameterType="Atleta">
+		DELETE FROM T_ATLETA WHERE ID = #{idAtleta};
+	</delete>
+	
+	
+	<select id="getAll" resultMap="result">
+		SELECT P.ID, A.ID_Societa, A.ID ID_ATLETA, ANNO_ISCRIZIONE, NOME, COGNOME, DATA_NASCITA,
+				SESSO,COMUNE_NASCITA,INDIRIZZO_RESIDENZA,TEL,MAIL,CF
+		FROM T_ATLETA AS A LEFT JOIN T_PERSONA AS P ON A.ID_PERSONA = P.ID; 
+	</select>
+
+	<select id="getById" parameterType="int" resultMap="result">
+		SELECT P.ID, A.ID_Societa, A.ID ID_ATLETA, ANNO_ISCRIZIONE, NOME, COGNOME, DATA_NASCITA,
+				SESSO,COMUNE_NASCITA,INDIRIZZO_RESIDENZA,TEL,MAIL,CF
+		FROM T_ATLETA AS A LEFT JOIN T_PERSONA AS P ON A.ID_PERSONA = P.ID
+		WHERE P.ID = #{id};
+	</select>
+
+	<resultMap id="result" type="Atleta">
+		<id property="idAtleta" column="ID_ATLETA"/>
+		<result property="nome" column="NOME" />
+		<result property="cognome" column="COGNOME" />
+		<result property="dataNascita" column="DATA_NASCITA" />
+		<result property="sesso" column="SESSO" />
+		<result property="comuneNascita" column="COMUNE_NASCITA" />
+		<result property="indirizzoResidenza" column="INDIRIZZO_RESIDENZA" />
+		<result property="telefono" column="TEL" />
+		<result property="mail" column="MAIL" />
+		<result property="codiceFiscale" column="CF" />
+		<result property="id" column="ID" />
+		<result property="annoIscrizione" column="ANNO_ISCRIZIONE" />
+		<association property="societa" column="ID_SOCIETA" select="SocietaMapping.getById"/>
+	</resultMap>
+	
+</mapper>

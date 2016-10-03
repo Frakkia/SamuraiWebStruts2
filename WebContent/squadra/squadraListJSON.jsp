@@ -8,10 +8,16 @@
 <title>Elenco Squadre</title>
 </head>
 <body>
-	<s:form action="squadraSearchAction">
+
+<!-- FORM DI SELEZIONE TORNEI -->
+
+	<s:form action="squadraSearchJSONAction">
 		<s:select list="map" key="squadra.torneo" name="id_torneo" headerKey="-1" headerValue="%{getText('squadra.torneo.tutti')}"></s:select>
 		<s:submit label="Filtra"/>	
 	</s:form>
+	
+<!-- TABELLA SQUADRE -->
+
 	<table border="1">
 		<thead>
 			<tr><th>id</th><th>nome</th><th>Torneo</th><th>Modifica</th><th>Elimina</th></tr>

@@ -1,0 +1,41 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="TorneoMapping">
+
+	<insert id="insert" parameterType="Torneo">
+		INSERT INTO T_TORNEO(ANNO_EDIZIONE,NOME)
+		VALUES(#{annoEdizione},#{nome});
+		<selectKey keyProperty = "id" resultType = "int" order = "AFTER">
+			SELECT LAST_INSERT_ID() as ID      
+		</selectKey>
+	</insert>
+
+	<update id="update" parameterType="Torneo">
+		UPDATE T_TORNEO SET ANNO_EDIZIONE = #{annoEdizione},
+		NOME = #{nome} WHERE ID = #{id};
+	</update>
+
+	<delete id="delete" parameterType="Torneo">
+		DELETE FROM T_TORNEO WHERE ID = #{id};
+	</delete>
+
+	<select id="getAll" resultMap="result">
+		SELECT ID,ANNO_EDIZIONE,NOME
+		FROM T_TORNEO;
+	</select>
+
+	<select id="getById" parameterType="int" resultMap="result">
+		SELECT ID,ANNO_EDIZIONE,NOME
+		FROM T_TORNEO
+		WHERE ID = #{id};
+	</select>
+
+	<resultMap id="result" type="Torneo">
+		<id property="id" column="ID"/>
+		<result property="nome" column="NOME" />
+		<result property="annoEdizione" column="ANNO_EDIZIONE" />		
+	</resultMap>
+	
+</mapper>
