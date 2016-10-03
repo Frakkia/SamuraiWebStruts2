@@ -15,7 +15,7 @@
 	<s:hidden name="societa.id" label="ID"></s:hidden>
 	<s:textfield name="societa.nome" key="societa.nome"></s:textfield>
 	<s:select list="map" key="societa.squadra" name="id_squadra" headerKey="%{start}" headerValue="%{startText}"></s:select>
-	<s:submit key="societa.invia"></s:submit>
+	<s:submit key="package.invia"></s:submit>
 </s:form>
 </body>
 </html>

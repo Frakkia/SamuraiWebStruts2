@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="SocietaMapping">
+
+	<insert id="insert" parameterType="Societa">
+		INSERT INTO T_SOCIETA(NOME,ID_SQUADRA)
+		VALUES(#{nome},#{squadra.id});
+		<selectKey keyProperty = "id" resultType = "int" order = "AFTER">
+			SELECT LAST_INSERT_ID() as ID      
+		</selectKey>
+	</insert>
+
+	<update id="update" parameterType="Societa">
+		UPDATE T_SOCIETA SET NOME = #{nome},
+		ID_SQUADRA = #{squadra.id} WHERE ID = #{id};
+	</update>
+
+	<delete id="delete" parameterType="Societa">
+		DELETE FROM T_SOCIETA WHERE ID = #{id};
+	</delete>
+
+	<select id="getAll" resultMap="result">
+		SELECT ID,NOME,ID_SQUADRA
+		FROM T_SOCIETA 
+	</select>
+
+	<select id="getById" parameterType="int" resultMap="result">
+		SELECT ID,NOME,ID_SQUADRA
+		FROM T_SOCIETA
+		WHERE ID = #{id};
+	</select>
+	
+	<select id="getBySquadra" parameterType="int" resultMap="result">
+		SELECT ID,NOME,ID_SQUADRA
+		FROM T_SOCIETA
+		WHERE ID_SQUADRA = #{id};
+	</select>
+
+	<resultMap id="result" type="Societa">
+		<id property="id" column="ID"/>
+		<result property="nome" column="NOME" />
+		<association property="squadra" column="ID_SQUADRA" select="SquadraMapping.getById"/>
+	</resultMap>
+	
+</mapper>
