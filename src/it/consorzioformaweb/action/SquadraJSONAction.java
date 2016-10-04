@@ -8,7 +8,10 @@ import java.util.List;
 
 public class SquadraJSONAction {
 
+	private Squadra squadra;
 	private List<Squadra> squadre;
+	
+	
 	public Squadra getSquadra() {
 		return squadra;
 	}
@@ -16,8 +19,6 @@ public class SquadraJSONAction {
 	public void setSquadra(Squadra squadra) {
 		this.squadra = squadra;
 	}
-
-	private Squadra squadra;
 	
 	public List<Squadra> getSquadre() {
 		return squadre;

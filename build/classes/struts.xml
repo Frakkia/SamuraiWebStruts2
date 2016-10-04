@@ -55,11 +55,23 @@
 	
 	</package> 
 	
-	<package name="squadra" namespace="/squadra" extends="json-default,struts-default">
+	<package name="json" namespace="/json" extends="json-default">
 	
-		<action name="getSquadreJSON" class="it.consorzioformaweb.action.SquadraJSONAction">
+		<action name="squadreJSON" class="it.consorzioformaweb.action.JSONAction" method="squadreJSON">
 			<result type="json" />
 		</action>
+		
+		<action name="torneiJSON" class="it.consorzioformaweb.action.JSONAction" method="torneiJSON">
+			<result type="json" />
+		</action>
+		
+		<action name="societaJSON" class="it.consorzioformaweb.action.JSONAction" method="societaJSON">
+			<result type="json" />
+		</action>
+	
+	</package>
+	
+	<package name="squadra" namespace="/squadra" extends="struts-default">
 		
 		<action name="squadraSearchAction" class="it.consorzioformaweb.action.SquadraAction" method="search">
 			<result name="success">squadraList.jsp</result>
