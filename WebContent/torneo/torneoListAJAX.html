@@ -17,7 +17,7 @@ $(function()
 		success: function(dati)
 				{
 					var tornei = dati.tornei;
-					ris = "table";
+					ris = "<table border='1'>";
 					ris += "<thead>";
 					ris += "<th>Nome Torneo</th><th>Anno</th>";
 					ris += "</thead>";
@@ -25,7 +25,7 @@ $(function()
 					for (i = 0; i < tornei.length; i++)
 					{
 						ris += "<tr><td>" + tornei[i].nome + "</td>";
-						ris += "<td>" + tornei[i].anno + "</td></tr>";
+						ris += "<td>" + tornei[i].annoEdizione + "</td></tr>";
 					}
 					ris += "</tbody>";
 					ris += "</table>";
