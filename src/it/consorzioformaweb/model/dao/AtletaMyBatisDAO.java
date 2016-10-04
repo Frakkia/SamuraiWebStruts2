@@ -27,6 +27,13 @@ public class AtletaMyBatisDAO {
 		return result;
 	}
 	
+	public List<Atleta> searchByIdSocieta(int id){
+		session = sessionFactory.openSession();
+		List<Atleta> result = session.selectList("AtletaMapping.getByIdSocieta",id);
+		session.close();
+		return result;
+	}
+	
 	public Integer create(Atleta a){
 		session = sessionFactory.openSession();
 		session.insert("AtletaMapping.insertPersona",a);

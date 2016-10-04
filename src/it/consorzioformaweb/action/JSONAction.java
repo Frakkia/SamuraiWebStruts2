@@ -22,6 +22,10 @@ public class JSONAction {
 	private Squadra squadra;
 	private Torneo torneo;
 	private Atleta atleta;
+	private Societa societa;
+	
+	private int id_societa;
+	
 	
 	private List<Squadra> squadre;	
 	private List<Societa> societas;
@@ -52,10 +56,13 @@ public class JSONAction {
 	public String atletiJSON() throws IOException{
 		AtletaMyBatisDAO dao = new AtletaMyBatisDAO();
 		
-		// TODO
-		
+		if (id_societa != 0 &&
+				id_societa != -1)
+		{	
+			atleti = dao.searchByIdSocieta(societa.getId());
+		}
+		else
 			atleti = dao.search();
-		
 		return "success";
 	}
 	
@@ -133,5 +140,21 @@ public class JSONAction {
 
 	public void setAtleti(List<Atleta> atleti) {
 		this.atleti = atleti;
+	}
+
+	public Societa getSocieta() {
+		return societa;
+	}
+
+	public void setSocieta(Societa societa) {
+		this.societa = societa;
+	}
+
+	public int getId_societa() {
+		return id_societa;
+	}
+
+	public void setId_societa(int id_societa) {
+		this.id_societa = id_societa;
 	}
 }
