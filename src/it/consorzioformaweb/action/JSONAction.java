@@ -1,14 +1,16 @@
 package it.consorzioformaweb.action;
 
+import java.io.IOException;
+import java.util.List;
+
+import it.consorzioformaweb.model.dao.AtletaMyBatisDAO;
 import it.consorzioformaweb.model.dao.SocietaMyBatisDAO;
 import it.consorzioformaweb.model.dao.SquadraMyBatisDAO;
 import it.consorzioformaweb.model.dao.TorneoMyBatisDAO;
+import it.consorzioformaweb.model.dto.Atleta;
 import it.consorzioformaweb.model.dto.Societa;
 import it.consorzioformaweb.model.dto.Squadra;
 import it.consorzioformaweb.model.dto.Torneo;
-
-import java.io.IOException;
-import java.util.List;
 /**
  * Classe che restituisce i dati delle varie classi di modello
  * (Torneo, Squadra, Societa) in formato JSON
@@ -19,11 +21,12 @@ public class JSONAction {
 
 	private Squadra squadra;
 	private Torneo torneo;
+	private Atleta atleta;
 	
 	private List<Squadra> squadre;	
 	private List<Societa> societas;
 	private List<Torneo> tornei;
-	
+	private List<Atleta> atleti;
 	public String torneiJSON() throws IOException{
 		TorneoMyBatisDAO dao = new TorneoMyBatisDAO();
 				tornei = dao.search();
@@ -42,6 +45,16 @@ public class JSONAction {
 		{
 			squadre = dao.search();
 		}
+		
+		return "success";
+	}
+	
+	public String atletiJSON() throws IOException{
+		AtletaMyBatisDAO dao = new AtletaMyBatisDAO();
+		
+		// TODO
+		
+			atleti = dao.search();
 		
 		return "success";
 	}
@@ -104,5 +117,21 @@ public class JSONAction {
 
 	public void setSquadre(List<Squadra> squadre) {
 		this.squadre = squadre;
+	}
+
+	public Atleta getAtleta() {
+		return atleta;
+	}
+
+	public void setAtleta(Atleta atleta) {
+		this.atleta = atleta;
+	}
+
+	public List<Atleta> getAtleti() {
+		return atleti;
+	}
+
+	public void setAtleti(List<Atleta> atleti) {
+		this.atleti = atleti;
 	}
 }

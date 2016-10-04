@@ -68,6 +68,10 @@
 		<action name="societaJSON" class="it.consorzioformaweb.action.JSONAction" method="societaJSON">
 			<result type="json" />
 		</action>
+		
+		<action name="atletiJSON" class="it.consorzioformaweb.action.JSONAction" method="atletiJSON">
+			<result type="json" />
+		</action>
 	
 	</package>
 	
