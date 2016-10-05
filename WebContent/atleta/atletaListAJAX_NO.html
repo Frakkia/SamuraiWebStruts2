@@ -7,8 +7,8 @@
 <script type="text/javascript" src="../js/myFunctions.js"></script>
 
 <script type="text/javascript">$(initSelectSocieta);</script>
-<script type="text/javascript">$(initSelectSquadre);</script>
-<script type="text/javascript">$(initSelectTornei);</script>
+<!-- <script type="text/javascript">$(initSelectSquadre2);</script>  -->
+<!-- <script type="text/javascript">$(initSelectTornei);</script>  -->
 <script type="text/javascript">$(printTabella);</script>
 <title>Lista Tornei</title>
 </head>
@@ -18,11 +18,17 @@ Filtra Società: <select id="selectSocieta"></select>
 <script type="text/javascript">
 $('#selectSocieta').bind('change', printTabella);
 </script>
-Filtra Squadra: <select id="selectSquadra"></select>
+<script type="text/javascript">
+$('#selectSocieta').bind('change', initSelectSquadre2);
+</script>
+Filtra Squadra: <select id="selectSquadra">
+	<option value='-1'>Tutte le squadre</option>
+</select>
 <script type="text/javascript">
 $('#selectSquadra').bind('change', printTabella);
 </script>
-Filtra Torneo: <select id="selectTorneo"></select>
+Filtra Torneo: <select id="selectTorneo">
+	<option value='-1'>Tutti i tornei</option></select>
 <script type="text/javascript">
 $('#selectTorneo').bind('change', printTabella);
 </script>

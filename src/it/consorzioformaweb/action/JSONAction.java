@@ -31,6 +31,8 @@ public class JSONAction {
 	private List<Societa> societas;
 	private List<Torneo> tornei;
 	private List<Atleta> atleti;
+	
+	
 	public String torneiJSON() throws IOException{
 		TorneoMyBatisDAO dao = new TorneoMyBatisDAO();
 				tornei = dao.search();
