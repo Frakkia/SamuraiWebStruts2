@@ -89,6 +89,28 @@ function initSelectSquadre()
 	});
 }
 
+function initSelectSquadre2()
+{
+	$.ajax(
+	{
+		type: "GET",
+		url: "../json/squadreJSON.action",
+		dataType: "json",
+		success: function(dati)
+			{
+				var squadre = dati.squadre;
+				var sceltaSocieta = $('#selectSocieta').val();
+				
+				ris = "<option value='-1'>Tutte le squadre</option>";
+				for (i = 0; i < squadre.length; i++)
+				{
+					if ((sceltaSocieta == null || sceltaSocieta == '-1') )
+						ris += "<option value='" + squadre[i].id +"'>" + squadre[i].nome + "</option>";
+				}
+				$("#selectSquadra").html(ris);
+			}
+	});
+}
 function initSelectTornei()
 {
 	$.ajax(
