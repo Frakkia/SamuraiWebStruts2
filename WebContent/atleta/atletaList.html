@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<script type="text/javascript" src="../js/jquery-3.1.1.js"></script>
+<style type="text/css">
+.hidden{
+visibility: hidden}</style>
+<script type="text/javascript">
+$(function()
+{
+	
+	var idSocieta;
+	var idSquadra;
+	var idTorneo;
+	
+	function populateTornei(){
+		$.getJSON("../json/torneiJSON.action", function(data){
+			var torneoSel = $("#torneo_sel");
+			var defOption = $("<option>");
+			defOption.text("Scegli..");
+			defOption.attr("value","");
+			torneoSel.append(defOption);
+			//for each
+			$.each(data.tornei, function(key,val){
+				var option = $("<option>");
+				option.text(val.nome);
+				option.attr("value",val.id);
+				torneoSel.append(option);
+			});
+			torneoSel.on("change",function(sender){
+				$("#torneo_sel option:selected").each(function(){
+					idTorneo = $(this).val();
+					populateSquadre(idTorneo);
+				});
+			});
+		});	
+	}
+	
+	function populateSquadre(idTorneo){
+		$.getJSON("../json/squadreJSON.action?torneo.id="+ idTorneo, function(data){
+			
+			var squadreSel = $("#squadra_sel");
+			squadreSel.html("");
+			var defOption = $("<option>");
+			defOption.text("Scegli..");
+			defOption.attr("value","");
+			squadreSel.append(defOption);
+			//for each
+			$.each(data.squadre, function(key,val){
+				var option = $("<option>");
+				option.text(val.nome);
+				option.attr("value",val.id);
+				squadreSel.append(option);
+			});
+			squadreSel.on("change",function(sender){
+				$("#squadra_sel option:selected").each(function(){
+					idSquadra = $(this).val();
+					populateSocieta(idSquadra);
+				});
+			});
+			squadreSel.removeClass("hidden");
+		});	
+		
+	}
+	
+	function populateSocieta(idSquadra){
+		$.getJSON("../json/societaJSON.action?squadra.id="+ idSquadra, function(data){
+			
+			var societaSel = $("#societa_sel");
+			societaSel.html("");
+			var defOption = $("<option>");
+			defOption.text("Scegli..");
+			defOption.attr("value","");
+			societaSel.append(defOption);
+			//for each
+			$.each(data.societas, function(key,val){
+				var option = $("<option>");
+				option.text(val.nome);
+				option.attr("value",val.id);
+				societaSel.append(option);
+			});
+			societaSel.on("change",function(sender){
+				$("#societa_sel option:selected").each(function(){
+					idSocieta = $(this).val();
+					populateList(idTorneo,idSquadra,idSocieta);
+				});
+			});
+			societaSel.removeClass("hidden");
+		});	
+		
+	}
+	
+	function populateList(idTorneo,idSquadra,idSocieta){
+		
+	}
+	
+	populateTornei();
+	
+
+	
+			// eseguo la chiamata ajax per recuperare i dati
+			$.ajax(
+			{
+				type: "GET",
+				url: "../json/atletiJSON.action",	// chiamata che mi da i dati in formato json
+				dataType: "json",
+				success: function(dati)
+						{
+							var table = $("#atleta_tab");
+							if (dati.atleti.length != 0){
+								table.removeClass("hidden");
+								for (var i = 0; i < dati.atleti.length; i++){
+									var tr = $("<tr>");
+									var td1 = $("<td>");
+									td1.text(dati.atleti[i].id);
+									var td2 = $("<td>");
+									td2.text(dati.atleti[i].nome);
+									tr.append(td1);
+									tr.append(td2);
+									table.append(tr);
+								}
+							}
+							
+						},
+				error: function(){alert("Chiamata fallita!");}
+			});	
+		});
+</script>
+<title>Insert title here</title>
+
+</head>
+<body>
+
+<select id="torneo_sel">
+
+</select>
+
+<select id="squadra_sel" class="hidden">
+
+</select>
+
+<select id="societa_sel" class="hidden">
+
+</select>
+
+
+
+
+
+<table border='1' id="atleta_tab" class="hidden"></table>
+
+</body>
+</html>
