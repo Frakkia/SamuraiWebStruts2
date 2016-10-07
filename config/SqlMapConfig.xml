@@ -8,6 +8,7 @@
       <typeAlias alias = "Squadra" type = "it.consorzioformaweb.model.dto.Squadra"/>
       <typeAlias alias = "Societa" type = "it.consorzioformaweb.model.dto.Societa"/>
       <typeAlias alias = "Atleta" type = "it.consorzioformaweb.model.dto.Atleta"/>
+      <typeAlias alias = "ParameterObject" type = "it.consorzioformaweb.model.dto.ParameterObject"/>
    </typeAliases>
 		
    <environments default = "developement">

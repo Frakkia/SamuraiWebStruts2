@@ -60,6 +60,16 @@
 		FROM T_ATLETA AS A LEFT JOIN T_PERSONA AS P ON A.ID_PERSONA = P.ID
 		WHERE P.ID = #{id};
 	</select>
+	
+	<select id="getByAll" parameterType="ParameterObject" resultMap="result">
+		SELECT per.nome, per.cognome, soc.id, soc.nome, squ.id,
+				squ.nome, tor.id, tor.nome, atl.id_societa
+		FROM	t_atleta atl, t_persona per, t_societa soc, t_squadra squ, t_torneo tor
+		WHERE	atl.id_persona = per.id and atl.id_societa = soc.id and soc.id_squadra = squ.id and squ.id_torneo = tor.id
+				and (tor.id = #{idTorneo} or -1 = #{idTorneo})
+				and (squ.id = #{idSquadra} or -1 = #{idSquadra})
+				and (soc.id = #{idSocieta} or -1 = #{idSocieta});
+	</select>
 
 	<resultMap id="result" type="Atleta">
 		<id property="idAtleta" column="ID_ATLETA"/>

@@ -73,6 +73,9 @@
 			<result type="json" />
 		</action>
 	
+	<action name="atletiJSONNew" class="it.consorzioformaweb.action.JSONAction" method="atletiJSONNew">
+			<result type="json" />
+		</action>
 	</package>
 	
 	<package name="squadra" namespace="/squadra" extends="struts-default">
