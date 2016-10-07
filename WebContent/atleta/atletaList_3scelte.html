@@ -31,6 +31,7 @@ $(function()
 			torneoSel.on("change",function(sender){
 				$("#torneo_sel option:selected").each(function(){
 					idTorneo = $(this).val();
+					populateList(idTorneo,"","");
 					populateSquadre(idTorneo);
 				});
 			});
@@ -56,6 +57,7 @@ $(function()
 			squadreSel.on("change",function(sender){
 				$("#squadra_sel option:selected").each(function(){
 					idSquadra = $(this).val();
+					populateList(idTorneo,idSquadra);
 					populateSocieta(idSquadra);
 				});
 			});
@@ -104,19 +106,27 @@ $(function()
 								if (dati.atleti.length != 0){
 									table.removeClass("hidden");
 									for (var i = 0; i < dati.atleti.length; i++){
-											if (dati.atleti[i].societa.id == idSocieta){
-											var tr = $("<tr>");
-											var td1 = $("<td>");
-											td1.text(dati.atleti[i].id);
-											var td2 = $("<td>");
-											td2.text(dati.atleti[i].nome);
-											var td3 =$("<td>");
-											td3.text(dati.atleti[i].societa.nome);
-											tr.append(td1);
-											tr.append(td2);
-											tr.append(td3);
-											table.append(tr);
-										}
+											if ((idTorneo == "" || dati.atleti[i].societa.squadra.torneo.id == idTorneo) &&
+													( idSquadra == "" || dati.atleti[i].societa.squadra.id == idSquadra) &&
+														(idSocieta == "" || dati.atleti[i].societa.id == idSocieta)){
+												var tr = $("<tr>");
+												var td1 = $("<td>");
+												td1.text(dati.atleti[i].id);
+												var td2 = $("<td>");
+												td2.text(dati.atleti[i].nome);
+												var td3 =$("<td>");
+												td3.text(dati.atleti[i].societa.nome);
+												var td4 =$("<td>");
+												td4.text(dati.atleti[i].societa.squadra.nome);
+												var td5 =$("<td>");
+												td5.text(dati.atleti[i].societa.squadra.torneo.nome);
+												tr.append(td1);
+												tr.append(td2);
+												tr.append(td3);
+												tr.append(td4);
+												tr.append(td5);
+												table.append(tr);
+											}
 									}
 								}
 							},
@@ -125,6 +135,7 @@ $(function()
 	}
 	
 	populateTornei();
+	populateList("","","");
 });
 </script>
 <title>Insert title here</title>
@@ -132,19 +143,17 @@ $(function()
 </head>
 <body>
 
-<select id="torneo_sel">
+Torneo: <select id="torneo_sel">
 
 </select>
 
-<select id="squadra_sel" class="hidden">
+Squadra: <select id="squadra_sel" class="hidden">
 
 </select>
 
-<select id="societa_sel" class="hidden">
+Società: <select id="societa_sel" class="hidden">
 
 </select>
-
-
 
 
 

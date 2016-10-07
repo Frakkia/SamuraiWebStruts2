@@ -19,7 +19,7 @@ $(function()
 			var torneoSel = $("#torneo_sel");
 			var defOption = $("<option>");
 			defOption.text("Scegli..");
-			defOption.attr("value","");
+			defOption.attr("value",-1);
 			torneoSel.append(defOption);
 			//for each
 			$.each(data.tornei, function(key,val){
@@ -31,6 +31,7 @@ $(function()
 			torneoSel.on("change",function(sender){
 				$("#torneo_sel option:selected").each(function(){
 					idTorneo = $(this).val();
+					populateList(idTorneo,-1,-1);
 					populateSquadre(idTorneo);
 				});
 			});
@@ -95,7 +96,7 @@ $(function()
 		$.ajax(
 				{
 					type: "GET",
-					url: "../json/atletiJSON.action",	// chiamata che mi da i dati in formato json
+					url: "../json/atletiJSONNew.action?po.idTorneo=" + idTorneo + "&po.idSquadra=" + idSquadra + "&po.idSocieta=" + idSocieta,	// chiamata che mi da i dati in formato json
 					dataType: "json",
 					success: function(dati)
 							{
@@ -104,19 +105,19 @@ $(function()
 								if (dati.atleti.length != 0){
 									table.removeClass("hidden");
 									for (var i = 0; i < dati.atleti.length; i++){
-											if (dati.atleti[i].societa.id == idSocieta){
+											
 											var tr = $("<tr>");
 											var td1 = $("<td>");
 											td1.text(dati.atleti[i].id);
 											var td2 = $("<td>");
 											td2.text(dati.atleti[i].nome);
-											var td3 =$("<td>");
-											td3.text(dati.atleti[i].societa.nome);
+											//var td3 =$("<td>");
+											//td3.text(dati.atleti[i].societa.nome);
 											tr.append(td1);
 											tr.append(td2);
-											tr.append(td3);
+											//tr.append(td3);
 											table.append(tr);
-										}
+
 									}
 								}
 							},
@@ -125,6 +126,7 @@ $(function()
 	}
 	
 	populateTornei();
+	populateList('-1','-1','-1');
 });
 </script>
 <title>Insert title here</title>
