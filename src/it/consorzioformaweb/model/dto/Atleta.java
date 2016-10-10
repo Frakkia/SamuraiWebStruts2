@@ -2,7 +2,6 @@ package it.consorzioformaweb.model.dto;
 
 public class Atleta extends Persona {
 
-	//getId() id di t_persona
 	private Integer idAtleta;
 	private Societa societa;
 	private Integer annoIscrizione;

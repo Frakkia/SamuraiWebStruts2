@@ -78,6 +78,23 @@
 		</action>
 	</package>
 	
+	
+	<package name="atleta" namespace="/atleta" extends="struts-default json-default">
+		
+		<action name="atletaReadAction" class="it.consorzioformaweb.action.AtletaAction" method="read">
+			<result name="success">atletaForm.jsp</result>
+		</action>
+		
+		<action name="atletaCreateAction" class="it.consorzioformaweb.action.AtletaAction" method="create">
+			<result type="json"/>
+		</action>
+		
+		<action name="atletaDeleteAction" class="it.consorzioformaweb.action.AtletaAction" method="delete">
+			<result name="success">atletaForm_dialog.jsp</result>
+		</action>
+	</package>
+	
+	
 	<package name="squadra" namespace="/squadra" extends="struts-default">
 		
 		<action name="squadraSearchAction" class="it.consorzioformaweb.action.SquadraAction" method="search">

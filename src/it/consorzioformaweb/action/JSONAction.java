@@ -1,16 +1,17 @@
 package it.consorzioformaweb.action;
 
-import java.io.IOException;
-import java.util.List;
-
 import it.consorzioformaweb.model.dao.AtletaMyBatisDAO;
 import it.consorzioformaweb.model.dao.SocietaMyBatisDAO;
 import it.consorzioformaweb.model.dao.SquadraMyBatisDAO;
 import it.consorzioformaweb.model.dao.TorneoMyBatisDAO;
 import it.consorzioformaweb.model.dto.Atleta;
+import it.consorzioformaweb.model.dto.ParameterObject;
 import it.consorzioformaweb.model.dto.Societa;
 import it.consorzioformaweb.model.dto.Squadra;
 import it.consorzioformaweb.model.dto.Torneo;
+
+import java.io.IOException;
+import java.util.List;
 /**
  * Classe che restituisce i dati delle varie classi di modello
  * (Torneo, Squadra, Societa) in formato JSON
@@ -26,7 +27,7 @@ public class JSONAction {
 	
 	private int id_societa;
 	
-	
+	private ParameterObject po;
 	private List<Squadra> squadre;	
 	private List<Societa> societas;
 	private List<Torneo> tornei;
@@ -65,6 +66,12 @@ public class JSONAction {
 		}
 		else
 			atleti = dao.search();
+		return "success";
+	}
+	
+	public String atletiJSONNew() throws IOException{
+		AtletaMyBatisDAO dao = new AtletaMyBatisDAO();
+		atleti = dao.searchByAll(po);
 		return "success";
 	}
 	
@@ -158,5 +165,13 @@ public class JSONAction {
 
 	public void setId_societa(int id_societa) {
 		this.id_societa = id_societa;
+	}
+
+	public ParameterObject getPo() {
+		return po;
+	}
+
+	public void setPo(ParameterObject po) {
+		this.po = po;
 	}
 }

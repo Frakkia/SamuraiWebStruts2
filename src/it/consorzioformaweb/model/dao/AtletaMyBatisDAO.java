@@ -2,6 +2,7 @@ package it.consorzioformaweb.model.dao;
 
 
 import it.consorzioformaweb.model.dto.Atleta;
+import it.consorzioformaweb.model.dto.ParameterObject;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -30,6 +31,14 @@ public class AtletaMyBatisDAO {
 	public List<Atleta> searchByIdSocieta(int id){
 		session = sessionFactory.openSession();
 		List<Atleta> result = session.selectList("AtletaMapping.getByIdSocieta",id);
+		session.close();
+		return result;
+	}
+	
+	public List<Atleta> searchByAll(ParameterObject po){
+		session = sessionFactory.openSession();
+		
+		List<Atleta> result = session.selectList("AtletaMapping.getByAll",po);
 		session.close();
 		return result;
 	}

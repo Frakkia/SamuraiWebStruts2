@@ -62,7 +62,7 @@
 	</select>
 	
 	<select id="getByAll" parameterType="ParameterObject" resultMap="result">
-		SELECT per.nome, per.cognome, soc.id, soc.nome, squ.id,
+		SELECT  per.id, per.nome, per.cognome, soc.id, soc.nome, squ.id,
 				squ.nome, tor.id, tor.nome, atl.id_societa
 		FROM	t_atleta atl, t_persona per, t_societa soc, t_squadra squ, t_torneo tor
 		WHERE	atl.id_persona = per.id and atl.id_societa = soc.id and soc.id_squadra = squ.id and squ.id_torneo = tor.id
